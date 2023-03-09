@@ -1,17 +1,17 @@
-## MultiOMIC analysis of cfRNA sequencing pipeline
+# MultiOMIC analysis of cfRNA sequencing pipeline
 
 Rowan Callahan and Elias Spiliotopolous
 
 THe following pipeline has around four different parts:
 
-# 1: Snakemake 
+## 1: Snakemake 
  - This will have our main snakefile and our five different sub rules that we use    
-# 2: Environments
+## 2: Environments
  - all of the config yaml files that we use w conda to setup environments
-# 3: Output Folders
+## 3: Output Folders
  - data for all of the intermediary results
  - results for all of our tabulated results 
-# 4: Config files
+## 4: Config files
  - config.yaml here
  - config.yaml in the profile
  - metadata.txt metadata for all of the samples
