@@ -1,0 +1,43 @@
+##############################################################################
+# Genomes and annotation files 
+##############################################################################
+
+# GTF file for genome build ensembl 90 
+gtf_file:
+  /home/groups/CEDAR/tools/cfRNA_resources/gencode.v27.annotation.gtf
+TE_gtf:
+  /home/groups/CEDAR/tools/cfRNA_resources/te_rmsk_thisisatestpath.gtf
+
+#prebuilt star index
+star_index:
+  /home/groups/CEDAR/roskamsh/tools/cfRNA_star_index
+
+#genome location
+genome:
+  /home/groups/CEDAR/tools/cfRNA_resources/GRCh38.primary_assembly.genome.fa
+
+####################################################################
+# TOOLS 
+####################################################################
+#star tool location
+star_tool:
+  /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+
+#picart tool location
+picard_tool:
+  /home/groups/CEDAR/tools/picard-tools-1.119/MarkDuplicates.jar
+
+sickle_tool:
+  /home/groups/CEDAR/tools/sickle
+
+#############################################################################################
+# Overall roject information 
+#############################################################################################
+project_name:
+  "test_project"
+metadata:
+  "./test_project_metadata.txt"
+glob_path:
+  "samples/raw/{sample}_R1.fq"
+
+
