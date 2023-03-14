@@ -44,7 +44,7 @@ rule picard:
     output:
         temp("samples/genecounts_rmdp/{sample}_bam/{sample}.rmd.bam")
     group: "short_post_align"
-    params
+    params:
       picard=config["picard_tool"]
     resources:
         mem_mb=3500         
@@ -83,18 +83,18 @@ rule star:
     threads: 4
     resources:
         mem_mb=35000         
-    run:
+    params:
          STAR=config["star_tool"],
          pathToGenomeIndex = config["star_index"]
-
-         shell("""
-                {STAR} --runThreadN {threads} --runMode alignReads --genomeDir {pathToGenomeIndex} \
-                --readFilesIn {input.fwd} {input.rev} \
-                --outFileNamePrefix samples/star/{wildcards.sample}_bam/ \
-                --sjdbGTFfile {params.gtf} --quantMode GeneCounts \
-                --sjdbGTFtagExonParentGene gene_name \
-                --outSAMtype BAM SortedByCoordinate \
-                """)
+    shell:
+        """
+        {params.STAR} --runThreadN {threads} --runMode alignReads --genomeDir {params.pathToGenomeIndex} \
+        --readFilesIn {input.fwd} {input.rev} \
+        --outFileNamePrefix samples/star/{wildcards.sample}_bam/ \
+        --sjdbGTFfile {params.gtf} --quantMode GeneCounts \
+        --sjdbGTFtagExonParentGene gene_name \
+        --outSAMtype BAM SortedByCoordinate \
+        """
 
 rule fastqc:
     input:
