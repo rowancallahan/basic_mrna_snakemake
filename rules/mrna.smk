@@ -12,15 +12,11 @@ rule genecount:
         "samples/genecounts_rmdp/{sample}_bam/{sample}_sort.rmd.bam"
     output:
         "samples/htseq_count/{sample}_htseq_gene_count.txt",
-
-    log:
-        "logs/genecount/{sample}_genecount.log"
     params:
-        name = "genecount_{sample}",
         gtf = config["gtf_file"]
     conda:
         "../envs/omic_qc_wf.yaml"
-    threads: 1
+    group: "short_post_align"
     shell:
         """htseq-count \
                 -f bam \
@@ -35,38 +31,39 @@ rule sort:
       "samples/genecounts_rmdp/{sample}_bam/{sample}.rmd.bam"
     output:
       "samples/genecounts_rmdp/{sample}_bam/{sample}_sort.rmd.bam"
-    params:
-      name = "sort_{sample}",
-      mem = "6400"
-
+    group: "short_post_align"
     conda:
       "../envs/omic_qc_wf.yaml"
     shell:
       """samtools sort -O bam -n {input} -o {output}"""
 
+#todo switch to another duplicate caller?
 rule picard:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
     output:
         temp("samples/genecounts_rmdp/{sample}_bam/{sample}.rmd.bam")
-    params:
-        name="rmd_{sample}",
-        mem="5300"
-    run:
+    group: "short_post_align"
+    params
       picard=config["picard_tool"]
-
-      shell("java -Xmx3g -jar {picard} \
-      INPUT={input} \
-      OUTPUT={output} \
-      METRICS_FILE=samples/genecounts_rmdp/{wildcards.sample}_bam/{wildcards.sample}.rmd.metrics.text \
-      REMOVE_DUPLICATES=true")
+    resources:
+        mem_mb=3500         
+    #defined manually as 3 gigabytes in the rule below
+    shell:
+        """
+        java -Xmx3g -jar {params.picard} \
+        INPUT={input} \
+        OUTPUT={output} \
+        METRICS_FILE=samples/genecounts_rmdp/{wildcards.sample}_bam/{wildcards.sample}.rmd.metrics.text \
+        REMOVE_DUPLICATES=true
+        """
 
 rule index:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
     output:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam.bai"
-
+    group: "short_post_align"
     conda:
         "../envs/omic_qc_wf.yaml"
     shell:
@@ -83,7 +80,9 @@ rule star:
         "samples/star/{sample}_bam/Log.final.out"
     params:
         gtf=config["gtf_file"]
-
+    threads: 4
+    resources:
+        mem_mb=35000         
     run:
          STAR=config["star_tool"],
          pathToGenomeIndex = config["star_index"]
