@@ -6,7 +6,7 @@
 gtf_file:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/gencode.v43.chr_patch_hapl_scaff.annotation.gtf
 TE_gtf:
-  /home/groups/CEDAR/tools/cfRNA_resources/te_rmsk_thisisatestpath.gtf
+  /home/groups/CEDAR/callahro/cfrna_references/hg38_rmsk_TE.gtf
 
 #prebuilt star index
 star_index:
@@ -40,5 +40,8 @@ metadata:
   "./test_project_metadata.txt"
 glob_path:
   "samples/raw/{sample}_R1.fq"
+gscratch_path:
+  ""
+#  "/home/exacloud/gscratch/CEDAR/cfRNA-seq-pipeline/multi_omic_pipeline/"
 
 
