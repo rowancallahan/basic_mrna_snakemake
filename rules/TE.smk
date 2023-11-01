@@ -89,7 +89,8 @@ rule map_TE:
         --outFileNamePrefix {params.outfile_prefix} \
         --outSAMtype BAM SortedByCoordinate \
         --winAnchorMultimapNmax 100 \
-        --outFilterMultimapNmax 100
+        --outFilterMultimapNmax 100 \
+        --limitBAMsortRAM 45878378926
         """
 
 
