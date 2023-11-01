@@ -41,7 +41,6 @@ metadata:
 glob_path:
   "samples/raw/{sample}_R1.fq"
 gscratch_path:
-  ""
-#  "/home/exacloud/gscratch/CEDAR/cfRNA-seq-pipeline/multi_omic_pipeline/"
+  "/home/exacloud/gscratch/CEDAR/cfRNA-seq-pipeline/multi_omic_pipeline/"
 
 
