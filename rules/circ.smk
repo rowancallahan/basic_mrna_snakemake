@@ -69,3 +69,19 @@ rule circ_explorer_annotate_star:
             mem_mb=10000
         shell:
             """ CIRCexplorer2 annotate -r {params.ref_gtf_exp} -g {params.ref_fa_exp} -b {input} -o {output} """
+
+rule circ_compiler_CE:
+        input:
+            expand(config["gscratch_path"] + "samples/circ_explorer_star/{sample}_known_circ.txt", sample = SAMPLES)
+        output:
+            expand("./results/{project_name}_circ_CE.txt", project_name=project_title)
+        script:
+            "./scripts/compile_CE.R"
+
+rule circ_compiler_CQ:
+        input:
+            expand(config["gscratch_path"] + "samples/ciriquant/{sample}/{sample}.gtf", sample = SAMPLES)
+        output:
+            expand("./results/{project_name}_circ_CQ.txt", project_name=project_title)
+        script:
+            "./scripts/compile_CQ.R"
