@@ -6,7 +6,6 @@ rule circ_compiler_CE:
         run:
             import pandas as pd
             data =  pd.DataFrame()
-            rownames = []
             for file in input:
                 temp_df = pd.read_csv(file, sep = "\t", header = None)
                 df = pd.DataFrame()
