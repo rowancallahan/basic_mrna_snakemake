@@ -16,6 +16,17 @@ star_index:
 genome:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/GRCh38.p13.genome.fa
 
+#fasta for circExplorer
+ref_fa_exp:
+  /home/groups/CEDAR/spilioto/tools/hg38.fa
+  
+#gtf for circExplorer
+ref_txt_exp:
+  /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.txt
+
+#star index for circExplorer
+star_index_exp:
+  /home/groups/CEDAR/spilioto/tools/hg38_ref_star_index
 
 ####################################################################
 # TOOLS 
