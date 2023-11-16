@@ -1,0 +1,12 @@
+name: hg38
+tools:
+  bwa: /home/groups/CEDAR/spilioto/tools/miniconda3/envs/ciriquant/bin/bwa
+  hisat2: /home/groups/CEDAR/spilioto/tools/miniconda3/envs/ciriquant/bin/hisat2
+  stringtie: /home/groups/CEDAR/spilioto/tools/miniconda3/envs/ciriquant/bin/stringtie
+  samtools: /home/groups/CEDAR/spilioto/tools/miniconda3/envs/ciriquant/bin/samtools
+
+reference:
+  fasta: /home/groups/CEDAR/spilioto/tools/hg38.fa
+  gtf: /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.gtf
+  bwa_index: /home/groups/CEDAR/spilioto/tools/hg38.fa
+  hisat_index: /home/groups/CEDAR/spilioto/tools/hg38
