@@ -100,7 +100,6 @@ rule star:
         gtf = config["gtf_file"],
         star = config["star_tool"],
         output_name_prefix = config["gscratch_path"] + "samples/star/{sample}_bam/",
-
     shell:
         """{params.star} --runThreadN {threads} --runMode alignReads --genomeDir {params.pathToGenomeIndex} \
         --readFilesIn {input.fwd} {input.rev} \

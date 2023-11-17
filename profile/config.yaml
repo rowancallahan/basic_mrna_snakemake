@@ -1,4 +1,4 @@
-cluster: "sbatch --cpus-per-task {threads} --time=24:00:00 --mem={resources.mem_mb} --job-name=smk-{rule}-%j --output=smk-{rule}-%j"
+cluster: "sbatch --cpus-per-task {threads} --time=24:00:00 --mem={resources.mem_mb} --job-name=smk-{rule}-%j --output=logs/{rule}/smk-%j --partition=exacloud"
 ## you can use {wildcards.sample} but this will fail withe xpanded rules
 default-resources:
   - mem_mb=6000

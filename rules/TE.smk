@@ -76,7 +76,6 @@ rule map_TE:
         gtf=config["gtf_file"],
         outfile_prefix = config["gscratch_path"] + "samples/star_TE/{sample}/",
         STAR=config["star_tool"],
-
     threads: 8 
     resources:
         mem_mb=55000
