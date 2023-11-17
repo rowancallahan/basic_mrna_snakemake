@@ -3,8 +3,6 @@ rule circ_compiler_CE:
             expand(config["gscratch_path"] + "samples/circ_explorer_star/{sample}_known_circ.txt", sample = SAMPLES)
         output:
             "./results/{project_name}_circ_CE.txt".format(project_name=config["project_name"])
-        log:
-            "logs/circ_compiler_CE.log"
         run:
             import pandas as pd
             data =  pd.DataFrame()
@@ -25,8 +23,6 @@ rule circ_compiler_CQ:
             expand(config["gscratch_path"] + "samples/ciriquant/{sample}/{sample}.gtf", sample = SAMPLES)
         output:
             "./results/{project_name}_circ_CQ.txt".format(project_name=config["project_name"])
-        log:
-            "logs/circ_compiler_CQ.log"
         run:
             import pandas as pd
             data =  pd.DataFrame()
@@ -55,8 +51,6 @@ rule ciriquant:
             output_name_prefix = config["gscratch_path"] + "samples/ciriquant/{sample}/"
         conda:
             "../envs/ciriquant.yaml"
-        log:
-            "logs/ciriquant/{sample}_ciriquant.log"
         threads: 8
         resources:
             mem_mb=64000
@@ -66,8 +60,6 @@ rule ciriquant:
 rule circ_explorer_parse_star:
         input: config["gscratch_path"] + "samples/star_exp/{sample}_bam/Chimeric.out.junction"
         output: config["gscratch_path"] + "samples/circ_explorer_star/{sample}/{sample}_backspliced.junction.bed"
-        log:
-            "logs/circ_explorer_parse/{sample}_circ_explorer_parse.log"
         threads: 4
         resources:
             mem_mb=10000
@@ -83,8 +75,6 @@ rule circ_explorer_annotate_star:
                 ref_gtf_exp = config["ref_txt_exp"]
         conda:
                 "../envs/circexplorer.yaml"
-        log:
-            "logs/circ_explorer_annotate/{sample}_circ_explorer_annotate.log"
         threads: 2
         resources:
             mem_mb=10000
@@ -104,8 +94,6 @@ rule star_CE:
         STAR=config["star_tool"],
         pathToGenomeIndex = config["star_index_exp"],
         output_name_prefix = config["gscratch_path"] + "samples/star_exp/{sample}_bam/"
-    log:
-        "logs/star_CE/{sample}_star_CE.log"
     threads: 8
     resources:
         mem_mb=64000

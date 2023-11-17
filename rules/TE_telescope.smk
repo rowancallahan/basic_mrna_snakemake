@@ -9,8 +9,6 @@ rule telescope:
         sorted_bam="samples/telescope_count/{sample}.bam",
     resources:
         mem_mb=32000
-    log:
-        "logs/telescope/{sample}_telescope.log"
     threads: 4 
     shell:
         """

@@ -6,8 +6,6 @@ rule combine_TE:
         unstranded = "results/{project_name}_unstranded_TE_counts.txt".format(project_name=config["project_name"]),
         rev =  "results/{project_name}_reverse_TE_counts.txt".format(project_name=config["project_name"]),
 
-    log:
-        "logs/combine_TE.log"
     run:
         import pandas as pd
 
@@ -39,8 +37,6 @@ rule TEtranscripts_rev:
         gtf=config["gtf_file"],
         TE_gtf=config["TE_gtf"],
         outdir="samples/te_count_rev",
-    log:
-        "logs/TETranscripts_rev/{sample}_TETranscripts_rev.log"
     resources:
         mem_mb=32000
     shell:
@@ -61,8 +57,6 @@ rule TEtranscripts:
         outdir="samples/te_count",
     resources:
         mem_mb=32000
-    log:
-        "logs/TEtranscripts/{sample}_TEtranscripts.log"
     shell:
         """
         TEcount --format BAM --GTF {params.gtf} --TE {params.TE_gtf} \
@@ -82,8 +76,6 @@ rule map_TE:
         gtf=config["gtf_file"],
         outfile_prefix = config["gscratch_path"] + "samples/star_TE/{sample}/",
         STAR=config["star_tool"],
-    log:
-        "logs/map_TE/{sample}_map_TE.log"
     threads: 8 
     resources:
         mem_mb=55000
@@ -110,8 +102,6 @@ rule clumpify:
         rev = temp(config["gscratch_path"] + "samples/clumped/{sample}_R2_clumped.fq"),
     resources:
         mem_mb=66000
-    log:
-        "logs/clumpify/{sample}_clumpify.log"
     shell:
         """
         export PATH=$PATH:/home/groups/CEDAR/callahro/software/bbmap/bbmap/
