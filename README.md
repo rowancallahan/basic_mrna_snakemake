@@ -17,10 +17,10 @@ The following pipeline has around four different parts:
  - metadata.txt metadata for all of the samples
 
 Before Running, you will need too:
-### 1: Link samples into a samples/raw directory in the base folder
-### 2: Change the Gscratch location at the bottom of the config.yaml file
-### 3: Add a tab-delimited txt file containing the metadata for the samples
-### 4: If running circ pipeline, make sure reads are long enough, or that quality scores are turned down in the rules if reads are short
+#### 1: Link samples into a samples/raw directory in the base folder
+#### 2: Change the Gscratch location at the bottom of the config.yaml file
+#### 3: Add a tab-delimited txt file containing the metadata for the samples
+#### 4: If running circ pipeline, make sure reads are long enough, or that quality scores are turned down in the rules if reads are short
 
 
 TODO:
