@@ -50,7 +50,7 @@ rule ciriquant:
             ciri_conf = config["ucsc_ciri_conf"],
             output_name_prefix = config["gscratch_path"] + "samples/ciriquant/{sample}/"
         conda:
-            "../envs/ciriquant.yaml"
+            "./envs/ciriquant.yaml"
         threads: 8
         resources:
             mem_mb=64000
@@ -64,7 +64,7 @@ rule circ_explorer_parse_star:
         resources:
             mem_mb=10000
         conda:
-                "../envs/circexplorer.yaml"
+                "./envs/circexplorer.yaml"
         shell: """CIRCexplorer2 parse -t STAR {input} -b {output}"""
 
 rule circ_explorer_annotate_star:
@@ -74,7 +74,7 @@ rule circ_explorer_annotate_star:
                 ref_fa_exp = config["ref_fa_exp"],
                 ref_gtf_exp = config["ref_txt_exp"]
         conda:
-                "../envs/circexplorer.yaml"
+                "./envs/circexplorer.yaml"
         threads: 2
         resources:
             mem_mb=10000
