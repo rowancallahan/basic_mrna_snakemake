@@ -7,6 +7,8 @@ rule spliceq:
         gtf=config["gtf_file"],
     resources:
         mem_mb=32000
+    log:
+        "logs/spliceq/{sample}_spliceq.log"
     threads: 4 
     shell:
         """
@@ -21,6 +23,8 @@ rule sort_position:
     #group: "short_post_align"
     params:
         samtools="/opt/installed/samtools-1.6/bin/samtools"
+    log:
+        "logs/sort_position/{sample}_sort_position.log"
     shell:
       """{params.samtools} sort -O bam {input} -o {output}"""
 

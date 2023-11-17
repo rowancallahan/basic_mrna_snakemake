@@ -3,6 +3,8 @@ rule compile_counts:
         expand("samples/htseq_count/{sample}_htseq_gene_count.txt", sample=SAMPLES),
     output:
         "results/{project_name}_mrna_counts.txt".format(project_name=config["project_name"]),
+    log:
+        "log/compile_counts.log"
     run:
         import pandas as pd
         data = pd.DataFrame() 
@@ -30,6 +32,8 @@ rule genecount:
         gtf = config["gtf_file"]
     conda:
         "../envs/omic_qc_wf.yaml"
+    log:
+        "logs/genecount/{sample}_genecount.log"
     #group: "short_post_align"
     shell:
         """htseq-count \
@@ -46,6 +50,8 @@ rule sort:
     output:
         temp(config["gscratch_path"] + "samples/genecounts_rmdp/{sample}_bam/{sample}_sort.rmd.bam")
     #group: "short_post_align"
+    log:
+        "logs/sort/{sample}_sort.log"
     params:
         samtools="/opt/installed/samtools-1.6/bin/samtools"
     shell:
@@ -61,6 +67,8 @@ rule picard:
     params:
         picard=config["picard_tool"],
         metrics=config["gscratch_path"] + "samples/genecounts_rmdp/{sample}_bam/{sample}.rmd.metrics.text"
+    log:
+        "logs/picard/{sample}_picard.log"
     resources:
         mem_mb=3500         
     #defined manually as 3 gigabytes in the rule below
@@ -81,6 +89,8 @@ rule index:
 #    group: "short_post_align"
     params:
         samtools="/opt/installed/samtools-1.6/bin/samtools"
+    log:
+        "logs/index/{sample}_index.log"
     shell:
         """{params.samtools} index {input} {output}"""
 
@@ -100,7 +110,8 @@ rule star:
         gtf = config["gtf_file"],
         star = config["star_tool"],
         output_name_prefix = config["gscratch_path"] + "samples/star/{sample}_bam/",
-
+    log:
+        "logs/star/{sample}_star.log"
     shell:
         """{params.star} --runThreadN {threads} --runMode alignReads --genomeDir {params.pathToGenomeIndex} \
         --readFilesIn {input.fwd} {input.rev} \
@@ -120,6 +131,8 @@ rule fastqc:
 
     conda:
         "../envs/fastqc.yaml"
+    log:
+        "logs/fastqc/{sample}_fastqc.log"
     shell:
         """fastqc --outdir samples/fastqc/{wildcards.sample} --extract  -f fastq {input.fwd} {input.rev}"""
 
@@ -134,6 +147,8 @@ rule trimming:
         single = temp("samples/trimmed/{sample}_R1_singletons.fq")
     params:
         sickle = config["sickle_tool"]
+    log:
+        "logs/trimming/{sample}_trimming.log"
     shell:
         """{params.sickle} pe -f {input.fwd} -r {input.rev}  -l 40 -q 20 -t sanger  -o {output.fwd} -p {output.rev} -s {output.single} &> {input.fwd}.log
         """
