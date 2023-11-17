@@ -2,7 +2,7 @@ rule circ_compiler_CE:
         input:
             expand(config["gscratch_path"] + "samples/circ_explorer_star/{sample}_known_circ.txt", sample = SAMPLES)
         output:
-            "results/{project_name}_circ_CE.txt".format(project_name=config["project_name"])
+            "./results/{project_name}_circ_CE.txt".format(project_name=config["project_name"])
         run:
             import pandas as pd
             data =  pd.DataFrame()
@@ -22,7 +22,7 @@ rule circ_compiler_CQ:
         input:
             expand(config["gscratch_path"] + "samples/ciriquant/{sample}/{sample}.gtf", sample = SAMPLES)
         output:
-            "results/{project_name}_circ_CQ.txt".format(project_name=config["project_name"])
+            "./results/{project_name}_circ_CQ.txt".format(project_name=config["project_name"])
         run:
             import pandas as pd
             data =  pd.DataFrame()
@@ -47,7 +47,7 @@ rule ciriquant:
             temp(config["gscratch_path"] + "samples/ciriquant/{sample}/align/{sample}.sorted.bam"),
             temp(config["gscratch_path"] + "samples/ciriquant/{sample}/circ/{sample}_denovo.sorted.bam")
         params:
-            ciri_conf = config["ucsc_ciri_conf"]
+            ciri_conf = config["ucsc_ciri_conf"],
             output_name_prefix = config["gscratch_path"] + "samples/ciriquant/{sample}/"
         conda:
             "../envs/ciriquant.yaml"
@@ -98,7 +98,7 @@ rule star_CE:
     resources:
         mem_mb=64000
     shell:
-        """{params.STAR} --runThreadN {threads} --runMode alignReads --genomeDir {pathToGenomeIndex} \
+        """{params.STAR} --runThreadN {threads} --runMode alignReads --genomeDir {params.pathToGenomeIndex} \
                 --readFilesIn {input.fwd} {input.rev} \
                 --outFileNamePrefix {params.output_name_prefix} \
                 --sjdbGTFfile {params.ref_gtf_exp} --quantMode GeneCounts \

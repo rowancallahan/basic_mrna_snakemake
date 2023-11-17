@@ -12,6 +12,10 @@ TE_gtf:
 star_index:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/STAR_index
 
+#ciriquant_conf
+ucsc_ciri_conf:
+  circ_conf_ucsc.yaml
+
 #genome location
 genome:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/GRCh38.p13.genome.fa
@@ -21,6 +25,8 @@ ref_fa_exp:
   /home/groups/CEDAR/spilioto/tools/hg38.fa
   
 #gtf for circExplorer
+ref_gtf_exp:
+  /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.gtf
 ref_txt_exp:
   /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.txt
 
@@ -46,12 +52,10 @@ sickle_tool:
 # Overall roject information 
 #############################################################################################
 project_name:
-  "test_project"
+  "circ_pipeline_test"
 metadata:
-  "./test_project_metadata.txt"
+  "./test_circ_metadata.txt"
 glob_path:
   "samples/raw/{sample}_R1.fq"
 gscratch_path:
   "/home/exacloud/gscratch/CEDAR/cfRNA-seq-pipeline/multi_omic_pipeline/"
-
-
