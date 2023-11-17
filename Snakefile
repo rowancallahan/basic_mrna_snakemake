@@ -24,15 +24,15 @@ rule all:
         #"results/{project_name}_mrna_counts.txt".format(project_name=config["project_name"]),
         #"results/{project_name}_unstranded_TE_counts.txt".format(project_name=config["project_name"]),
         #expand("./results/{project_name}_quality_control_metrics.txt", project_name=config["project_name"]),
-        #expand("./results/{project_name}_circ_CE.txt", project_name=config["project_name"]),
-        #expand("./results/{project_name}_circ_CQ.txt", project_name=config["project_name"]),
+        expand("./results/{project_name}_circ_CE.txt", project_name=config["project_name"]),
+        expand("./results/{project_name}_circ_CQ.txt", project_name=config["project_name"]),
         #expand("./results/{project_name}_microbe_counts.txt", project_name=config["project_name"]),
-        expand("samples/spliceq/{sample}_counts.tsv", sample=SAMPLES),
+        #expand("samples/spliceq/{sample}_counts.tsv", sample=SAMPLES),
 
 
 include: "rules/mrna.smk"
-include: "rules/TE.smk"
-include: "rules/spliceQ.smk"
-##include: "rules/circ.smk"
+##include: "rules/TE.smk"
+##include: "rules/spliceQ.smk"
+include: "rules/circ.smk"
 ##include: "rules/microbe.smk"
 ##include: "rules/qc.smk"
