@@ -51,7 +51,7 @@ rule ciriquant:
             output_name_prefix = config["gscratch_path"] + "samples/ciriquant/{sample}/"
         conda:
             "./envs/ciriquant.yaml"
-        threads: 8
+        threads: 10
         resources:
             mem_mb=72000
         shell:
@@ -60,9 +60,9 @@ rule ciriquant:
 rule circ_explorer_parse_star:
         input: config["gscratch_path"] + "samples/star_exp/{sample}_bam/Chimeric.out.junction"
         output: config["gscratch_path"] + "samples/circ_explorer_star/{sample}/{sample}_backspliced.junction.bed"
-        threads: 4
+        threads: 6
         resources:
-            mem_mb=10000
+            mem_mb=46000
         conda:
                 "./envs/circexplorer.yaml"
         shell: """CIRCexplorer2 parse -t STAR {input} -b {output}"""
