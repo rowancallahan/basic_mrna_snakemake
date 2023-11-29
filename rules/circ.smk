@@ -53,7 +53,7 @@ rule ciriquant:
             "./envs/ciriquant.yaml"
         threads: 8
         resources:
-            mem_mb=64000
+            mem_mb=72000
         shell:
             """CIRIquant -t {threads} -1 {input.R1} -2 {input.R2} --config {params.ciri_conf} -o {params.output_name_prefix} -p {wildcards.sample} """
 
