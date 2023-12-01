@@ -18,6 +18,7 @@ rule circ_compiler_CE:
             df.fillna(0)
             df.to_csv(output[0], sep = '\t', header = True)
 
+
 rule circ_compiler_CQ:
         input:
             expand(config["gscratch_path"] + "samples/ciriquant/{sample}/{sample}.gtf", sample = SAMPLES)
