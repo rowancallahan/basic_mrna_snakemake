@@ -11,7 +11,7 @@ rule circ_compiler_CE:
                 df = pd.DataFrame()
                 df["Name"] = temp_df[0] + ":" + temp_df[1].apply(str) + "|" + temp_df[2].apply(str)
                 df["Counts"] = temp_df[12]
-                df["Sample"] = file.split("_")[0]
+                df["Sample"] = file.split("_")[4].split("/")[1]
                 frames = [data, df]
                 data = pd.concat(frames)
             df = data.pivot(index = "Name", columns = "Sample", values = "Counts")
@@ -31,7 +31,7 @@ rule circ_compiler_CQ:
                 df = pd.DataFrame()
                 df["Name"] = temp_df[0] + ":" + temp_df[3].apply(str) + "|" + temp_df[4].apply(str)
                 df["Counts"] = temp_df[8].str.extract(r'bsj (\S+); fsj')
-                df["Sample"] = file.split(".")[0]
+                df["Sample"] = file.split(".")[0].split("/")[-1]
                 frames = [data, df]
                 data = pd.concat(frames)
             df = data.pivot(index = "Name", columns = "Sample", values = "Counts")
@@ -50,10 +50,10 @@ rule ciriquant:
             ciri_conf = config["ucsc_ciri_conf"],
             output_name_prefix = config["gscratch_path"] + "samples/ciriquant/{sample}/"
         conda:
-            "./envs/ciriquant.yaml"
-        threads: 10
+            "../envs/ciriquant.yaml"
+        threads: 8
         resources:
-            mem_mb=72000
+            mem_mb=64000
         shell:
             """CIRIquant -t {threads} -1 {input.R1} -2 {input.R2} --config {params.ciri_conf} -o {params.output_name_prefix} -p {wildcards.sample} """
 
@@ -64,7 +64,7 @@ rule circ_explorer_parse_star:
         resources:
             mem_mb=46000
         conda:
-                "./envs/circexplorer.yaml"
+                "../envs/circexplorer.yaml"
         shell: """CIRCexplorer2 parse -t STAR {input} -b {output}"""
 
 rule circ_explorer_annotate_star:
@@ -74,7 +74,7 @@ rule circ_explorer_annotate_star:
                 ref_fa_exp = config["ref_fa_exp"],
                 ref_gtf_exp = config["ref_txt_exp"]
         conda:
-                "./envs/circexplorer.yaml"
+                "../envs/circexplorer.yaml"
         threads: 2
         resources:
             mem_mb=10000
