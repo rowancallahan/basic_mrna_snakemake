@@ -8,5 +8,5 @@
 #SBATCH --mail-user=spilioto@ohsu.edu
 #SBATCH --mail-type=FAIL
 
-snakemake --configfile config.yaml --profile profile --keep-going --rerun-incomplete
+snakemake --configfile config.yaml --profile profile --keep-going --rerun-incomplete --use-conda
 
