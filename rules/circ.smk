@@ -11,7 +11,7 @@ rule circ_compiler_CE:
                 df = pd.DataFrame()
                 df["Name"] = temp_df[0] + ":" + temp_df[1].apply(str) + "|" + temp_df[2].apply(str)
                 df["Counts"] = temp_df[12]
-                df["Sample"] = file.split("_")[4].split("/")[1]
+                df["Sample"] = file.split("_")[-3].split("/")[1]
                 frames = [data, df]
                 data = pd.concat(frames)
             df = data.pivot(index = "Name", columns = "Sample", values = "Counts")
