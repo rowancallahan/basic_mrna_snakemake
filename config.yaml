@@ -5,34 +5,13 @@
 # GTF file for genome build ensembl 90 
 gtf_file:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/gencode.v43.chr_patch_hapl_scaff.annotation.gtf
-TE_gtf:
-  /home/groups/CEDAR/callahro/cfrna_references/hg38_rmsk_TE.gtf
-
 #prebuilt star index
 star_index:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/STAR_index
 
-#ciriquant_conf
-ucsc_ciri_conf:
-  circ_conf_ucsc.yaml
-
 #genome location
 genome:
   /home/groups/CEDAR/callahro/cfrna_references/ensembl_109/GRCh38.p13.genome.fa
-
-#fasta for circExplorer
-ref_fa_exp:
-  /home/groups/CEDAR/spilioto/tools/hg38.fa
-  
-#gtf for circExplorer
-ref_gtf_exp:
-  /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.gtf
-ref_txt_exp:
-  /home/groups/CEDAR/spilioto/tools/hg38_ref_2023.txt
-
-#star index for circExplorer
-star_index_exp:
-  /home/groups/CEDAR/spilioto/tools/hg38_ref_star_index
 
 ####################################################################
 # TOOLS 
@@ -52,10 +31,8 @@ sickle_tool:
 # Overall roject information 
 #############################################################################################
 project_name:
-  "circ_pipeline_test"
-metadata:
-  "./test_circ_metadata.txt"
+  "florian_pipeline_run"
 glob_path:
   "samples/raw/{sample}_R1.fq"
 gscratch_path:
-  "/home/exacloud/gscratch/CEDAR/spilioto/cfRNA_pipeline_test/"
+  "/your/gscratch/path/here/or/rds"
