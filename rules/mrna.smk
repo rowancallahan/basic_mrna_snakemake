@@ -128,8 +128,8 @@ rule trimming:
         fwd = "samples/raw/{sample}_R1.fq",
         rev = "samples/raw/{sample}_R2.fq"
     output:
-        fwd = temp(config["gscratch_path"] + "samples/trimmed/{sample}_R1_t.fq"),
-        rev = temp(config["gscratch_path"] + "samples/trimmed/{sample}_R2_t.fq"),
+        fwd = pipe(config["gscratch_path"] + "samples/trimmed/{sample}_R1_t.fq"),
+        rev = pipe(config["gscratch_path"] + "samples/trimmed/{sample}_R2_t.fq"),
         single = temp("samples/trimmed/{sample}_R1_singletons.fq")
     params:
         sickle = config["sickle_tool"]
